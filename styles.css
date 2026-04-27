@@ -126,3 +126,22 @@ section { padding: 100px 0; }
     .skill-card-detailed { grid-template-columns: 1fr; grid-column: span 1; }
     .hero-name { font-size: 2.5rem; }
 }
+
+/* 首頁大頭照樣式 */
+.hero-avatar-container {
+    margin-bottom: 20px;
+}
+
+.hero-avatar {
+    width: 130px;            /* 頭像的寬度 */
+    height: 130px;           /* 頭像的高度 */
+    border-radius: 50%;      /* 變成正圓形 */
+    object-fit: cover;       /* 確保照片不變形 */
+    border: 3px solid var(--primary-color);   /* 藍色外框 */
+    box-shadow: 0 0 20px var(--primary-glow); /* 發光效果 */
+    transition: transform 0.3s ease;          /* 滑鼠互動動畫時間 */
+}
+
+.hero-avatar:hover {
+    transform: scale(1.05);  /* 滑鼠移過去時微幅放大 */
+}
