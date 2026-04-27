@@ -1,98 +1,112 @@
-/* 1. 基礎設定與變數 */
 :root {
     --primary-color: #60a5fa;
-    --bg-color: #0f172a;
-    --section-bg: #1e293b;
+    --primary-glow: rgba(96, 165, 250, 0.4);
+    --bg-color: #0b1120;
+    --section-bg: #111827;
     --text-color: #f1f5f9;
     --accent-color: #94a3b8;
+    --highlight-color: #fbbf24;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+
 body {
     font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
     line-height: 1.7;
     color: var(--text-color);
     background-color: var(--bg-color);
+    /* 這裡加入特色的點矩陣網格背景 */
+    background-image: radial-gradient(#1e293b 1px, transparent 1px);
+    background-size: 20px 20px;
 }
 
-.container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+.container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
 
-/* 2. 導覽列與按鈕 (Navbar & Buttons) */
+/* 裝飾粒子 (純 CSS 手寫圖樣) */
+.decorated-section { position: relative; overflow: hidden; }
+.decor-particle { position: absolute; background: var(--primary-glow); border-radius: 2px; opacity: 0.3; }
+.p1 { width: 40px; height: 40px; top: 10%; right: -20px; transform: rotate(45deg); }
+.p2 { width: 10px; height: 10px; bottom: 20%; left: 10%; border: 2px solid var(--primary-color); background: transparent; }
+.p3 { width: 20px; height: 20px; top: 50%; left: -10px; transform: rotate(15deg); }
+
+/* 導覽列 */
 .navbar {
     position: fixed; top: 0; width: 100%;
-    background: rgba(15, 23, 42, 0.9);
+    background: rgba(11, 17, 32, 0.85);
     backdrop-filter: blur(10px);
     z-index: 1000; padding: 15px 0;
-    border-bottom: 1px solid #334155;
+    border-bottom: 1px solid #1e293b;
 }
 .navbar .container { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-size: 1.3rem; font-weight: 800; color: var(--primary-color); }
+.logo { font-size: 1.3rem; font-weight: 800; color: var(--primary-color); letter-spacing: 2px; }
 .nav-links { display: flex; list-style: none; }
-.nav-links a { text-decoration: none; color: var(--text-color); margin-left: 20px; font-weight: 500; font-size: 0.9rem; }
+.nav-links a { text-decoration: none; color: var(--text-color); margin-left: 20px; font-weight: 500; font-size: 0.9rem; transition: 0.3s; }
+.nav-links a:hover { color: var(--primary-color); text-shadow: 0 0 8px var(--primary-glow); }
+
+/* Hero Section */
+.hero-section {
+    padding: 180px 0 120px;
+    background: radial-gradient(circle at top right, #1e3a8a 0%, #0b1120 70%);
+    text-align: center;
+}
+.hero-name { font-size: 3.5rem; margin-bottom: 15px; }
+.hero-tagline { font-size: 1.25rem; color: var(--accent-color); max-width: 600px; margin: 0 auto 40px; }
 
 .hero-btns { display: flex; justify-content: center; gap: 15px; }
-.btn { padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; }
-.btn-primary { background: var(--primary-color); color: #0f172a; }
+.btn { padding: 12px 28px; border-radius: 4px; text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; text-transform: uppercase; }
+.btn-primary { background: var(--primary-color); color: #0b1120; box-shadow: 0 0 15px var(--primary-glow); }
 .btn-outline { border: 1px solid var(--accent-color); color: var(--text-color); }
 
-/* 3. 各個 Section 樣式 */
-section { padding: 90px 0; }
-.section-title { font-size: 2rem; margin-bottom: 40px; text-align: center; color: var(--primary-color); }
+/* 各區塊標題 */
+section { padding: 100px 0; }
+.section-title { font-size: 2.2rem; margin-bottom: 50px; text-align: center; color: var(--primary-color); letter-spacing: 3px; }
+.section-title::after { content: ''; display: block; width: 40px; height: 2px; background: var(--primary-color); margin: 10px auto 0; box-shadow: 0 0 10px var(--primary-color); }
 
-/* Hero */
-.hero-section {
-    padding: 160px 0 100px;
-    background: radial-gradient(circle at top right, #1e3a8a 0%, #0f172a 70%);
-    text-align: center;
-}
-.hero-name { font-size: 3rem; margin-bottom: 15px; }
+/* 卡片與網格 */
+.about-grid, .expertise-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; }
 
-/* About & Expertise Grid */
-.about-grid, .expertise-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 40px;
-    margin-bottom: 40px;
-}
-
-.personal-info, .expertise-box {
+.terminal-card, .expertise-box {
     background: var(--section-bg);
-    padding: 25px;
-    border-radius: 16px;
-    border: 1px solid #334155;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #1e293b;
+    transition: 0.3s;
 }
+.terminal-card:hover, .expertise-box:hover { transform: translateY(-5px); box-shadow: 0 0 20px var(--primary-glow); }
 
-/* 技能標籤與課程列表 */
-.interests-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.interests-tags span {
-    background: #334155; border: 1px solid #475569; color: var(--accent-color);
-    padding: 4px 10px; border-radius: 6px; font-size: 0.8rem;
+/* 技能卡片大改造 (含照片) */
+.skill-card-detailed { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: center; grid-column: span 2; }
+.skill-image-container { position: relative; border-radius: 8px; overflow: hidden; border: 1px solid #1e293b; }
+.pistol-img { width: 100%; height: 200px; object-fit: cover; filter: contrast(110%); }
+.img-overlay { position: absolute; bottom: 0; right: 0; background: var(--primary-color); color: #0b1120; font-size: 0.7rem; font-weight: bold; padding: 2px 8px; }
+
+/* 課程列表 (遊戲選單風) */
+.course-list.game-menu-style li {
+    list-style: none; padding: 10px 0 10px 25px; border-bottom: 1px solid #1e293b; color: #cbd5e1; position: relative;
 }
+.course-list.game-menu-style li::before { content: '>'; position: absolute; left: 0; color: var(--accent-color); transition: 0.3s; }
+.course-list.game-menu-style li:hover::before { color: var(--primary-color); left: 5px; }
+.course-favorite { color: var(--highlight-color) !important; font-weight: bold; }
+
+/* 標籤樣式 */
+.interests-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+.interests-tags span { background: rgba(30, 41, 59, 0.5); border: 1px solid #334155; color: var(--accent-color); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; }
 .tag-special { border-color: var(--primary-color) !important; color: var(--primary-color) !important; font-weight: bold; }
 
-.course-list { list-style: none; }
-.course-list li { padding: 8px 0; border-bottom: 1px solid #334155; color: #cbd5e1; }
-.course-favorite { color: #fbbf24 !important; font-weight: bold; }
+/* 其他區塊 */
+.project-placeholder { background: rgba(17, 24, 39, 0.5); border: 2px dashed #334155; border-radius: 12px; padding: 60px 20px; text-align: center; }
+.loading-icon { width: 30px; height: 30px; border: 3px solid #1e293b; border-top: 3px solid var(--primary-color); border-radius: 50%; margin: 0 auto 20px; animation: spin 2s linear infinite; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-/* Project Placeholder */
-.project-placeholder {
-    background: rgba(30, 41, 59, 0.5);
-    border: 2px dashed #334155;
-    border-radius: 16px;
-    padding: 60px 20px;
-    text-align: center;
-}
-
-/* 4. Footer & Contact */
 .contact-section { text-align: center; background: #020617; }
 .contact-links { display: flex; justify-content: center; gap: 12px; margin-top: 25px; }
-.contact-item { padding: 10px 20px; background: #1e293b; border: 1px solid #334155; color: white; text-decoration: none; border-radius: 8px; }
-
+.contact-item { padding: 10px 20px; background: #111827; border: 1px solid #1e293b; color: white; text-decoration: none; border-radius: 8px; }
 .footer { padding: 40px 0; text-align: center; color: var(--accent-color); font-size: 0.85rem; }
 
-/* 5. RWD */
+/* RWD */
 @media (max-width: 768px) {
     .about-grid, .expertise-grid { grid-template-columns: 1fr; }
-    .hero-name { font-size: 2.2rem; }
+    .skill-card-detailed { grid-template-columns: 1fr; grid-column: span 1; }
+    .hero-name { font-size: 2.5rem; }
 }
